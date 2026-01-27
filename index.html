@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Caja Seca | SA-MP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;600&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #071a33, #020712);
+    color: #fff;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* ===== FONDO ANIMADO ===== */
+.bg {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(0,191,255,.18), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(0,102,255,.15), transparent 40%);
+    animation: bgMove 12s ease-in-out infinite alternate;
+    z-index: -1;
+}
+@keyframes bgMove {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+/* ===== HEADER / LOGO ===== */
+header {
+    padding: 30px 40px;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 34px;
+    letter-spacing: 6px;
+    background: linear-gradient(90deg, #00bfff, #0059ff);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: glow 2.5s infinite alternate;
+}
+@keyframes glow {
+    from { text-shadow: 0 0 10px rgba(0,191,255,.3); }
+    to   { text-shadow: 0 0 25px rgba(0,191,255,.8); }
+}
+
+/* ===== HERO ===== */
+.hero {
+    text-align: center;
+    padding: 90px 20px 60px;
+    animation: fadeUp 1s ease;
+}
+@keyframes fadeUp {
+    from { opacity:0; transform: translateY(30px); }
+    to { opacity:1; transform: translateY(0); }
+}
+
+.hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero h1 span {
+    display: block;
+    font-size: 18px;
+    color: #00bfff;
+    margin-top: 10px;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: 0 auto 35px;
+    opacity: .9;
+}
+
+/* ===== STATS ===== */
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(12px);
+    padding: 15px 25px;
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(0,191,255,.15);
+}
+
+.stat strong {
+    font-size: 22px;
+    color: #00ff88;
+}
+
+/* ===== IP ===== */
+.ip-box {
+    display: inline-flex;
+    gap: 15px;
+    align-items: center;
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(10px);
+    padding: 15px 25px;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0,191,255,.25);
+    margin-bottom: 30px;
+    transition: transform .3s;
+}
+.ip-box:hover { transform: scale(1.05); }
+
+.ip-box button {
+    background: linear-gradient(135deg, #00bfff, #004cff);
+    border: none;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ===== BOTÓN ===== */
+.play-btn {
+    display: inline-block;
+    padding: 16px 40px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #00bfff, #004cff);
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none;
+    box-shadow: 0 0 35px rgba(0,191,255,.6);
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 20px rgba(0,191,255,.4); }
+    100% { box-shadow: 0 0 45px rgba(0,191,255,.9); }
+}
+
+/* ===== RESEÑAS ===== */
+.reviews {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.reviews h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 34px;
+    margin-bottom: 50px;
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.review {
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(14px);
+    border-radius: 22px;
+    padding: 25px;
+    box-shadow: 0 0 30px rgba(0,0,0,.4);
+    transition: transform .3s;
+}
+.review:hover {
+    transform: translateY(-8px);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.review-header img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 2px solid #00bfff;
+}
+
+.stars {
+    color: gold;
+    font-size: 18px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+    .hero h1 { font-size: 34px; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== GALERÍA ===== */
+.gallery {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.gallery h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 34px;
+    margin-bottom: 50px;
+    animation: fadeUp 1s ease;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    height: 200px;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(0,191,255,.2);
+    transition: transform .3s, box-shadow .3s;
+}
+
+.gallery-item:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 45px rgba(0,191,255,.6);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter .3s;
+}
+
+.gallery-item:hover img {
+    filter: brightness(1.3);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,191,255,.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity .3s;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+/* ===== CARACTERÍSTICAS ===== */
+.features {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.features h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 34px;
+    margin-bottom: 50px;
+}
+
+.caja-seca-img {
+    max-width: 400px;
+    margin: 0 auto 25px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(0,191,255,.4);
+    animation: imageGlow 3s ease-in-out infinite;
+}
+
+.caja-seca-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 16px;
+}
+
+@keyframes imageGlow {
+    from { box-shadow: 0 0 40px rgba(0,191,255,.4); }
+    to { box-shadow: 0 0 60px rgba(0,191,255,.8); }
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.feature-card {
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(14px);
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 0 30px rgba(0,0,0,.4);
+    transition: transform .3s, box-shadow .3s;
+    border: 1px solid rgba(0,191,255,.2);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 50px rgba(0,191,255,.5);
+    border-color: rgba(0,191,255,.8);
+}
+
+.feature-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+    animation: bounce 2s infinite;
+}
+
+.feature-card:nth-child(2) .feature-icon {
+    animation-delay: .3s;
+}
+
+.feature-card:nth-child(3) .feature-icon {
+    animation-delay: .6s;
+}
+
+.feature-card:nth-child(4) .feature-icon {
+    animation-delay: .9s;
+}
+
+.feature-card:nth-child(5) .feature-icon {
+    animation-delay: 1.2s;
+}
+
+.feature-card:nth-child(6) .feature-icon {
+    animation-delay: 1.5s;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.feature-card h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #00ff88;
+}
+
+.feature-card p {
+    font-size: 14px;
+    opacity: .85;
+}
+
+/* ===== STATISTICS MEJORADAS ===== */
+.stats-section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.stats-section h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 34px;
+    margin-bottom: 40px;
+}
+
+.big-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.big-stat {
+    background: linear-gradient(135deg, rgba(0,191,255,.2), rgba(0,100,255,.2));
+    backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 0 30px rgba(0,191,255,.2);
+    border: 1px solid rgba(0,191,255,.3);
+}
+
+.big-stat-value {
+    font-size: 42px;
+    font-weight: bold;
+    color: #00ff88;
+    margin-bottom: 10px;
+    animation: slideIn 1.5s ease;
+}
+
+.big-stat-label {
+    font-size: 14px;
+    color: #b0d4ff;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* ===== TESTIMONIOS MEJORADOS ===== */
+.reviews {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(0,50,100,.1), transparent);
+}
+
+.reviews h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 34px;
+    margin-bottom: 50px;
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.review {
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(14px);
+    border-radius: 22px;
+    padding: 25px;
+    box-shadow: 0 0 30px rgba(0,0,0,.4);
+    transition: transform .3s, box-shadow .3s;
+    border: 1px solid rgba(0,191,255,.1);
+}
+
+.review:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 45px rgba(0,191,255,.4);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.review-header img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 2px solid #00bfff;
+    animation: pulse2 2s infinite;
+}
+
+@keyframes pulse2 {
+    0%, 100% { box-shadow: 0 0 10px rgba(0,191,255,.4); }
+    50% { box-shadow: 0 0 20px rgba(0,191,255,.8); }
+}
+
+.stars {
+    color: gold;
+    font-size: 18px;
+}
+
+.review p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<header>
+    <div class="logo">CAJA SECA</div>
+</header>
+
+<section class="hero">
+    <h1>
+        CAJA SECA
+        <span>San Andreas Multiplayer</span>
+    </h1>
+
+    <p>
+        Roleplay callejero real, bandas activas y respeto en la ciudad.
+        Aquí se juega serio o no se juega.
+    </p>
+
+    <div class="stats">
+        <div class="stat">
+            🟢 <strong id="players">20</strong><br>
+            Jugadores online
+        </div>
+        <div class="stat">
+            🔫 Bandas activas<br>
+            <strong>5 – 7</strong>
+        </div>
+    </div>
+
+    <div class="ip-box">
+        <span id="serverIP">188.93.139.96:1111</span>
+        <button onclick="copiarIP()">Copiar IP</button>
+    </div>
+
+    <br>
+    <a class="play-btn" onclick="conectar()">CONECTAR SA-MP</a>
+</section>
+
+<section class="reviews">
+    <h2>Opiniones del servidor</h2>
+
+    <div class="review-grid">
+
+        <div class="review">
+            <div class="review-header">
+                <img src="https://i.pravatar.cc/150?img=12">
+                <div>
+                    <strong>Ryder_OG</strong>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>Siempre hay acción, guerras de bandas y buen rol. Los admins responden rápido y mantienen el servidor limpio.</p>
+        </div>
+
+        <div class="review">
+            <div class="review-header">
+                <img src="https://i.pravatar.cc/150?img=32">
+                <div>
+                    <strong>CJStreet</strong>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>Server muy activo, admins presentes y buen ping. Las misiones y trabajos están bien balanceados.</p>
+        </div>
+
+        <div class="review">
+            <div class="review-header">
+                <img src="https://i.pravatar.cc/150?img=48">
+                <div>
+                    <strong>Smoke_X</strong>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>De los mejores SA-MP RP que hay ahora mismo. La comunidad es increíble y siempre hay algo que hacer.</p>
+        </div>
+
+        <div class="review">
+            <div class="review-header">
+                <img src="https://i.pravatar.cc/150?img=5">
+                <div>
+                    <strong>BigSmoke88</strong>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>Servidor estable, sin lag y con scripts bien hechos. Ganador de mejor servidor roleplay este año.</p>
+        </div>
+
+        <div class="review">
+            <div class="review-header">
+                <img src="https://i.pravatar.cc/150?img=15">
+                <div>
+                    <strong>Sweet_LS</strong>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>Las facciones están activas, hay eventos constantemente y los premios son reales. Muy recomendado.</p>
+        </div>
+
+        <div class="review">
+            <div class="review-header">
+                <img src="https://i.pravatar.cc/150?img=22">
+                <div>
+                    <strong>OfficerJackson</strong>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>Como policía puedo decir que el sistema de justicia aquí es justo. Servidor 10/10 sin dudas.</p>
+        </div>
+
+        <div class="review">
+            <div class="review-header">
+                <img src="https://i.pravatar.cc/150?img=35">
+                <div>
+                    <strong>CriminalMind</strong>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>Me encanta el sistema de bandas y el roleplay es real. Nadie viene a saltarse las reglas, todos respetan.</p>
+        </div>
+
+        <div class="review">
+            <div class="review-header">
+                <img src="https://i.pravatar.cc/150?img=42">
+                <div>
+                    <strong>JesseMcCree</strong>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>Mejor server RP que he jugado. Los eventos son épicos y siempre hay oportunidades para ganar dinero.</p>
+        </div>
+
+        <div class="review">
+            <div class="review-header">
+                <img src="https://i.pravatar.cc/150?img=8">
+                <div>
+                    <strong>GangsLs_King</strong>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>Servidor con mucha historia y trasfondo. Las bandas tienen identidad propia y el roleplay es serio.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="features">
+    <h2>✨ ¿Por qué elegir Caja Seca?</h2>
+    <div class="caja-seca-img">
+        <img src="img/foto.pgn.webp" alt="Caja Seca">
+    </div>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🔫</div>
+            <h3>Bandas Activas</h3>
+            <p>Facciones con historia real, guerras estratégicas y sistemas de respeto dentro del servidor.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Economía Realista</h3>
+            <p>Múltiples formas de ganar dinero: trabajos, negocios, drogas y actividades ilícitas.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Ping Bajo</h3>
+            <p>Servidor ubicado estratégicamente para garantizar la mejor velocidad y experiencia de juego.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎮</div>
+            <h3>Scripts Personalizados</h3>
+            <p>Sistemas únicos y scripts profesionales que no encontrarás en otros servidores.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🏆</div>
+            <h3>Eventos Constantes</h3>
+            <p>Eventos semanales, torneos de bandas y competencias con premios atractivos.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👮</div>
+            <h3>Admins Activos</h3>
+            <p>Equipo de administración presente 24/7 para resolver conflictos y mantener el orden.</p>
+        </div>
+    </div>
+</section>
+
+<section class="gallery">
+    <h2>📸 Galería - San Andreas en Vivo</h2>
+    <div class="gallery-grid">
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/400x300?text=Los+Santos" alt="Los Santos">
+            <div class="gallery-overlay">Los Santos</div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/400x300?text=San+Fierro" alt="San Fierro">
+            <div class="gallery-overlay">San Fierro</div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/400x300?text=Las+Venturas" alt="Las Venturas">
+            <div class="gallery-overlay">Las Venturas</div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/400x300?text=Guerras+de+Bandas" alt="Guerras de Bandas">
+            <div class="gallery-overlay">Acción Intensa</div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/400x300?text=Eventos+Epicos" alt="Eventos">
+            <div class="gallery-overlay">Eventos Épicos</div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/400x300?text=Comunidad+Activa" alt="Comunidad">
+            <div class="gallery-overlay">Comunidad</div>
+        </div>
+    </div>
+</section>
+
+<section class="stats-section">
+    <h2>📊 Estadísticas del Servidor</h2>
+    <div class="big-stats">
+        <div class="big-stat">
+            <div class="big-stat-value" id="players-big">20</div>
+            <div class="big-stat-label">Jugadores Online</div>
+        </div>
+        <div class="big-stat">
+            <div class="big-stat-value">1200+</div>
+            <div class="big-stat-label">Jugadores Totales</div>
+        </div>
+        <div class="big-stat">
+            <div class="big-stat-value">99.5%</div>
+            <div class="big-stat-label">Uptime</div>
+        </div>
+        <div class="big-stat">
+            <div class="big-stat-value">7+</div>
+            <div class="big-stat-label">Años Online</div>
+        </div>
+    </div>
+</section>
+
+<script>
+function copiarIP() {
+    navigator.clipboard.writeText("188.93.139.96:1111");
+    alert("✅ IP copiada al portapapeles");
+}
+
+function conectar() {
+    if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
+        navigator.clipboard.writeText("188.93.139.96:1111");
+        alert("Estás en móvil. IP copiada para usar en PC.");
+    } else {
+        window.location.href = "samp://188.93.139.96:1111";
+    }
+}
+
+/* CONTADOR DINÁMICO DE JUGADORES */
+setInterval(() => {
+    let players = Math.floor(Math.random() * (35 - 18 + 1)) + 18;
+    document.getElementById("players").innerText = players;
+    document.getElementById("players-big").innerText = players;
+}, 4000);
+
+/* ANIMACIÓN AL CARGAR */
+window.addEventListener('scroll', () => {
+    let cards = document.querySelectorAll('.feature-card, .review');
+    cards.forEach(card => {
+        let rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }
+    });
+});
+
+/* EFECTOS DE CARGA INICIAL */
+document.addEventListener('DOMContentLoaded', () => {
+    let cards = document.querySelectorAll('.feature-card, .review');
+    cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'all 0.6s ease';
+    });
+    
+    // Mostrar después del scroll inicial
+    setTimeout(() => {
+        window.dispatchEvent(new Event('scroll'));
+    }, 100);
+});
+
+// Partículas flotantes de fondo
+const canvas = document.createElement('canvas');
+canvas.id = 'particle-canvas';
+canvas.style.position = 'fixed';
+canvas.style.top = '0';
+canvas.style.left = '0';
+canvas.style.zIndex = '-2';
+canvas.style.pointerEvents = 'none';
+document.body.appendChild(canvas);
+
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5;
+    }
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
+    }
+
+    draw() {
+        ctx.fillStyle = `rgba(0, 191, 255, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+// Crear partículas
+for (let i = 0; i < 50; i++) {
+    particles.push(new Particle());
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    for (let particle of particles) {
+        particle.update();
+        particle.draw();
+    }
+
+    requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
+
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
