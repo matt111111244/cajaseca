@@ -35,15 +35,18 @@ body {
 
 /* ===== HEADER / LOGO ===== */
 header {
-    padding: 30px 40px;
+    padding: 35px 40px;
     position: relative;
     z-index: 10;
+    background: linear-gradient(180deg, rgba(0,0,0,.3) 0%, transparent 100%);
+    border-bottom: 1px solid rgba(255,100,0,.15);
+    backdrop-filter: blur(5px);
 }
 
 .logo {
     font-family: 'Orbitron', sans-serif;
-    font-size: 34px;
-    letter-spacing: 6px;
+    font-size: 38px;
+    letter-spacing: 7px;
     background: linear-gradient(90deg, #ff6600, #ffaa00);
     -webkit-background-clip: text;
     color: transparent;
@@ -59,7 +62,7 @@ header {
 /* ===== HERO ===== */
 .hero {
     text-align: center;
-    padding: 90px 20px 60px;
+    padding: 80px 20px 50px;
     animation: fadeUp 1s ease;
 }
 @keyframes fadeUp {
@@ -69,50 +72,40 @@ header {
 
 .hero h1 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 48px;
+    font-size: 56px;
     margin-bottom: 15px;
-    text-shadow: 0 0 30px rgba(255,100,0,.8), 0 0 60px rgba(200,0,0,.4);
+    text-shadow: 0 0 40px rgba(255,100,0,.8), 0 0 80px rgba(200,0,0,.4), 0 0 120px rgba(255,100,0,.2);
+    letter-spacing: 3px;
+    font-weight: 900;
 }
 
 .hero h1 span {
     display: block;
-    font-size: 18px;
-    color: #ff6600;
-    margin-top: 10px;
-    text-shadow: 0 0 20px rgba(255,100,0,.6);
+    font-size: 20px;
+    color: #ffaa00;
+    margin-top: 12px;
+    text-shadow: 0 0 20px rgba(255,170,0,.7);
+    letter-spacing: 2px;
+    font-weight: 600;
 }
 
 .hero p {
     max-width: 700px;
     margin: 0 auto 35px;
-    opacity: .9;
+    opacity: .95;
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.8;
     color: #ffcc99;
+    letter-spacing: 0.5px;
 }
 
 /* ===== STATS ===== */
 .stats {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
+    display: none;
 }
 
 .stat {
-    background: rgba(255,100,0,.08);
-    backdrop-filter: blur(12px);
-    padding: 15px 25px;
-    border-radius: 16px;
-    box-shadow: 0 0 25px rgba(255,100,0,.25);
-    border: 1px solid rgba(255,100,0,.3);
-}
-
-.stat strong {
-    font-size: 22px;
-    color: #ffaa00;
-    text-shadow: 0 0 10px rgba(255,170,0,.8);
+    display: none;
 }
 
 /* ===== IP ===== */
@@ -122,66 +115,92 @@ header {
     align-items: center;
     background: rgba(200,0,0,.12);
     backdrop-filter: blur(10px);
-    padding: 15px 25px;
-    border-radius: 16px;
-    box-shadow: 0 0 30px rgba(255,100,0,.35);
-    margin-bottom: 30px;
-    transition: transform .3s;
-    border: 2px solid rgba(255,100,0,.4);
+    padding: 18px 35px;
+    border-radius: 12px;
+    box-shadow: 0 0 40px rgba(255,100,0,.4), 0 0 80px rgba(255,100,0,.15);
+    margin: 40px auto 30px;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(255,100,0,.5);
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 .ip-box:hover { 
-    transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(255,100,0,.6);
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 0 50px rgba(255,100,0,.6), 0 0 100px rgba(255,100,0,.25), 0 10px 30px rgba(0,0,0,.3);
+    border-color: rgba(255,100,0,.8);
 }
 
 .ip-box button {
     background: linear-gradient(135deg, #ff6600, #cc3300);
     border: none;
     color: #fff;
-    padding: 10px 18px;
+    padding: 12px 24px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
     text-transform: uppercase;
-    box-shadow: 0 0 15px rgba(255,100,0,.5);
-    transition: all 0.3s;
+    letter-spacing: 1.5px;
+    font-size: 13px;
+    box-shadow: 0 0 20px rgba(255,100,0,.6), inset 0 1px 0 rgba(255,255,255,.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .ip-box button:hover {
-    box-shadow: 0 0 25px rgba(255,100,0,.8);
-    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255,100,0,.9), inset 0 1px 0 rgba(255,255,255,.3), 0 5px 20px rgba(0,0,0,.4);
+    transform: scale(1.15);
+    background: linear-gradient(135deg, #ff7722, #dd2200);
 }
 
 /* ===== BOTÓN ===== */
 .play-btn {
     display: inline-block;
-    padding: 16px 40px;
+    padding: 18px 50px;
     border-radius: 50px;
     background: linear-gradient(135deg, #ff6600, #cc0000);
     color: white;
     font-weight: bold;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-decoration: none;
-    box-shadow: 0 0 40px rgba(255,100,0,.7), inset 0 0 20px rgba(255,200,0,.2);
-    animation: pulse 2s infinite;
+    box-shadow: 0 0 50px rgba(255,100,0,.8), inset 0 0 25px rgba(255,200,0,.25), 0 8px 25px rgba(0,0,0,.3);
+    animation: pulse 2.5s ease-in-out infinite;
     text-transform: uppercase;
     border: 2px solid #ff8800;
+    font-size: 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
+
+.play-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 60px rgba(255,100,0,.9), inset 0 0 30px rgba(255,200,0,.35), 0 12px 35px rgba(0,0,0,.4);
+    background: linear-gradient(135deg, #ff7722, #dd0000);
+}
+
+.play-btn:active {
+    transform: translateY(-1px);
+}
+
 @keyframes pulse {
-    0% { box-shadow: 0 0 25px rgba(255,100,0,.5); }
-    100% { box-shadow: 0 0 50px rgba(255,100,0,.9), inset 0 0 20px rgba(255,200,0,.3); }
+    0% { box-shadow: 0 0 30px rgba(255,100,0,.5), inset 0 0 20px rgba(255,200,0,.15); }
+    50% { box-shadow: 0 0 60px rgba(255,100,0,.8), inset 0 0 25px rgba(255,200,0,.25); }
+    100% { box-shadow: 0 0 30px rgba(255,100,0,.5), inset 0 0 20px rgba(255,200,0,.15); }
 }
 
 /* ===== RESEÑAS ===== */
 .reviews {
     padding: 80px 20px;
     text-align: center;
+    background: linear-gradient(180deg, rgba(200,50,0,.08) 0%, transparent 100%);
 }
 
 .reviews h2 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 34px;
-    margin-bottom: 50px;
+    font-size: 42px;
+    margin-bottom: 60px;
+    text-shadow: 0 0 20px rgba(255,100,0,.6);
+    letter-spacing: 2px;
 }
 
 .review-grid {
@@ -234,13 +253,16 @@ header {
 .gallery {
     padding: 80px 20px;
     text-align: center;
+    background: linear-gradient(180deg, rgba(200,50,0,.05), transparent);
 }
 
 .gallery h2 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 34px;
-    margin-bottom: 50px;
+    font-size: 42px;
+    margin-bottom: 60px;
     animation: fadeUp 1s ease;
+    text-shadow: 0 0 20px rgba(255,100,0,.6);
+    letter-spacing: 2px;
 }
 
 .gallery-grid {
@@ -304,12 +326,15 @@ header {
 .features {
     padding: 80px 20px;
     text-align: center;
+    background: linear-gradient(180deg, transparent, rgba(200,50,0,.05));
 }
 
 .features h2 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 34px;
+    font-size: 42px;
     margin-bottom: 50px;
+    text-shadow: 0 0 20px rgba(255,100,0,.6);
+    letter-spacing: 2px;
 }
 
 .caja-seca-img {
@@ -320,6 +345,11 @@ header {
     box-shadow: 0 0 40px rgba(255,100,0,.5);
     animation: imageGlow 3s ease-in-out infinite;
     border: 3px solid rgba(255,100,0,.6);
+}
+
+.caja-seca-img.hero-img {
+    max-width: 500px;
+    margin: 25px auto 30px;
 }
 
 .caja-seca-img img {
@@ -345,16 +375,16 @@ header {
 .feature-card {
     background: rgba(255,100,0,.08);
     backdrop-filter: blur(14px);
-    border-radius: 22px;
-    padding: 30px;
+    border-radius: 18px;
+    padding: 35px 25px;
     box-shadow: 0 0 30px rgba(255,100,0,.2);
-    transition: transform .3s, box-shadow .3s;
+    transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid rgba(255,100,0,.3);
 }
 
 .feature-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 0 50px rgba(255,100,0,.6);
+    transform: translateY(-15px) scale(1.08);
+    box-shadow: 0 0 60px rgba(255,100,0,.6), 0 15px 40px rgba(0,0,0,.3);
     border-color: rgba(255,100,0,.8);
     background: rgba(255,100,0,.15);
 }
@@ -391,29 +421,35 @@ header {
 }
 
 .feature-card h3 {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 12px;
-    color: #ffaa00;
-    text-shadow: 0 0 10px rgba(255,170,0,.6);
+    color: #ffcc00;
+    text-shadow: 0 0 12px rgba(255,204,0,.8);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    font-weight: 700;
 }
 
 .feature-card p {
     font-size: 14px;
-    opacity: .85;
+    opacity: .9;
+    line-height: 1.7;
+    color: #f0f0f0;
 }
 
 /* ===== STATISTICS MEJORADAS ===== */
 .stats-section {
-    padding: 60px 20px;
+    padding: 80px 20px;
     text-align: center;
+    background: linear-gradient(180deg, transparent, rgba(200,50,0,.08));
 }
 
 .stats-section h2 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 34px;
-    margin-bottom: 40px;
+    font-size: 42px;
+    margin-bottom: 60px;
+    text-shadow: 0 0 20px rgba(255,100,0,.6);
+    letter-spacing: 2px;
 }
 
 .big-stats {
@@ -519,9 +555,64 @@ header {
 }
 
 .review p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #e0e0e0;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #e8e8e8;
+    font-weight: 300;
+}
+
+/* ===== ANIMACIONES DE SCROLL ===== */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-fade-in {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.animate-fade-in.visible {
+    opacity: 1;
+}
+
+.animate-scale-in {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-scale-in.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.animate-slide-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-slide-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.animate-slide-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-slide-right.visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 </style>
 </head>
@@ -545,15 +636,8 @@ header {
         Aquí se juega serio o no se juega.
     </p>
 
-    <div class="stats">
-        <div class="stat">
-            🟢 <strong id="players">20</strong><br>
-            Jugadores online
-        </div>
-        <div class="stat">
-            🔫 Bandas activas<br>
-            <strong>5 – 7</strong>
-        </div>
+    <div class="caja-seca-img hero-img">
+        <img src="https://raw.githubusercontent.com/matt111111244/cajaseca/refs/heads/main/WhatsApp%20Image%202026-01-28%20at%204.44.30%20AM.jpeg" alt="Caja Seca">
     </div>
 
     <div class="ip-box">
@@ -781,35 +865,55 @@ function conectar() {
 /* CONTADOR DINÁMICO DE JUGADORES */
 setInterval(() => {
     let players = Math.floor(Math.random() * (35 - 18 + 1)) + 18;
-    document.getElementById("players").innerText = players;
-    document.getElementById("players-big").innerText = players;
+    const playerBig = document.getElementById("players-big");
+    if (playerBig) {
+        playerBig.innerText = players;
+    }
 }, 4000);
 
-/* ANIMACIÓN AL CARGAR */
-window.addEventListener('scroll', () => {
-    let cards = document.querySelectorAll('.feature-card, .review');
-    cards.forEach(card => {
-        let rect = card.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }
-    });
-});
-
-/* EFECTOS DE CARGA INICIAL */
+/* ===== ANIMACIÓN DE SCROLL REVEAL CON INTERSECTION OBSERVER ===== */
 document.addEventListener('DOMContentLoaded', () => {
-    let cards = document.querySelectorAll('.feature-card, .review');
-    cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'all 0.6s ease';
+    // Agregar clases de animación a elementos
+    document.querySelectorAll('h2, h1, .caja-seca-img, .feature-card, .review, .gallery-item, .big-stat, .ip-box').forEach((el, index) => {
+        el.classList.add('animate-on-scroll');
+        el.style.transitionDelay = `${index * 0.08}s`;
     });
-    
-    // Mostrar después del scroll inicial
-    setTimeout(() => {
-        window.dispatchEvent(new Event('scroll'));
-    }, 100);
+
+    // Crear Intersection Observer para detección de elementos en viewport
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -80px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Observar todos los elementos animables
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Animación especial para párrafos
+    document.querySelectorAll('.hero p, .feature-card p, .review p').forEach((p, index) => {
+        p.style.opacity = '0';
+        p.style.transform = 'translateY(10px)';
+        p.style.transition = `all 0.6s ease ${index * 0.05}s`;
+        
+        const parentObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        parentObserver.observe(p);
+    });
 });
 
 // Partículas flotantes de fondo
